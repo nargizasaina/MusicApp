@@ -1,10 +1,16 @@
 import React from 'react';
+import {Route, Switch} from "react-router-dom";
+import MusicAppBuilder from "./containers/MusicAppBuilder/MusicAppBuilder";
+import Layout from "./components/UI/Layout/Layout";
 
 const App = () => {
     return (
-        <div>
-          
-        </div>
+        <Layout>
+            <Switch>
+                <Route path="/" exact component={MusicAppBuilder}/>
+                <Route render={() => <h1>Not Found</h1>} />
+            </Switch>
+        </Layout>
     );
 };
 
