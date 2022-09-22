@@ -10,8 +10,8 @@ const App = () => {
         <Layout>
             <Switch>
                 <Route path="/" exact component={MusicAppBuilder}/>
-                <Route path="/albums/artist/:id" exact component={ArtistAlbums}/>
-                <Route path="/tracks/album/:id" exact component={AlbumTracks}/>
+                <Route path="/albums" component={ArtistAlbums}/>
+                <Route path="/tracks" component={AlbumTracks}/>
                 <Route render={() => <h1>Not Found</h1>} />
             </Switch>
         </Layout>

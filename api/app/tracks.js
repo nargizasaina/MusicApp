@@ -10,7 +10,9 @@ router.get('/', async (req, res) => {
         if (req.query.album) {
             const tracksById = await Track
                 .find({album: req.query.album})
-                .sort(sort);
+                .sort(sort)
+                .populate('album', 'title');
+
             res.send(tracksById);
         }  else if (req.query.artist) {
             const albums = await Album.find({artist: req.query.artist}, "_id title artist");
@@ -18,6 +20,7 @@ router.get('/', async (req, res) => {
                 .find({album: {$in: albums}})
                 .sort(sort)
                 .populate('album');
+
             res.send(tracks);
         } else {
                 const tracks = await Track.find().sort(sort);
@@ -35,8 +38,11 @@ router.post('/', async (req, res) => {
         return res.status(400).send({error: 'Data is not valid'});
     }
 
+    let number = 1;
     const tracks = await Track.find();
-    const number = tracks[tracks.length - 1].number + 1;
+    if (tracks.length > 0) {
+        number = tracks[tracks.length - 1].number + 1;
+    }
 
     const trackData = {
         title,

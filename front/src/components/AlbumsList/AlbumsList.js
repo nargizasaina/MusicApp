@@ -11,7 +11,7 @@ const AlbumsList = ({id, year, title, image}) => {
 
     return (
         <Card sx={{ width: 250, margin: "10px" }} >
-            <CardActionArea component={Link} to={'/tracks/album/' + id}>
+            <CardActionArea component={Link} to={'/tracks?album=' + id}>
                 <CardMedia
                     component="img"
                     height="200"

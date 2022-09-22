@@ -17,7 +17,7 @@ const ArtistsList = ({id, title, image}) => {
 
     return (
         <Card sx={{ width: 250, margin: "10px" }} >
-            <CardActionArea component={Link} to={'/albums/artist/' + id}>
+            <CardActionArea component={Link} to={'/albums?artist=' + id}>
                 <CardMedia
                     component="img"
                     height="200"

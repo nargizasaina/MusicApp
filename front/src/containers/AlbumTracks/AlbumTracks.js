@@ -3,19 +3,25 @@ import {useDispatch, useSelector} from "react-redux";
 import {Container, Typography} from "@mui/material";
 import {fetchTracks} from "../../store/actions/tracksActions";
 
-const AlbumTracks = ({match}) => {
+const AlbumTracks = ({location}) => {
     const dispatch = useDispatch();
     const tracks = useSelector(state => state.tracks.tracks);
 
     useEffect(() => {
-        dispatch(fetchTracks(match.params.id));
-    }, [dispatch, match.params.id]);
+        const searchParams = new URLSearchParams(location.search);
+        const id = searchParams.getAll('album');
+        dispatch(fetchTracks(id[0]));
+    }, [dispatch, location.search]);
 
     return (
         <Container sx={{marginTop: "-16px", paddingTop: "16px"}}>
-            <Typography variant="h5">
-                Artists
-            </Typography>
+            {tracks[0] ?
+                <Typography variant="h5">
+                    List of tracks in album <b>{tracks[0].album.title}</b> of
+                </Typography>
+                : <Typography variant="h5">
+                    There are no tracks in this album
+                </Typography> }
             <ul>
                 {tracks.map(track => (
                     <li
