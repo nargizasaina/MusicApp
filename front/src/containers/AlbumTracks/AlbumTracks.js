@@ -17,7 +17,7 @@ const AlbumTracks = ({location}) => {
         <Container sx={{marginTop: "-16px", paddingTop: "16px"}}>
             {tracks[0] ?
                 <Typography variant="h5">
-                    List of tracks in album <b>{tracks[0].album.title}</b> of
+                    List of tracks in album <b>{tracks[0].album.title}</b> of <b>{tracks[0].album.artist.title}</b>
                 </Typography>
                 : <Typography variant="h5">
                     There are no tracks in this album

@@ -11,7 +11,10 @@ router.get('/', async (req, res) => {
             const tracksById = await Track
                 .find({album: req.query.album})
                 .sort(sort)
-                .populate('album', 'title');
+                .populate(
+                    {path: 'album', select: 'title',
+                        populate: {path: 'artist', select: 'title'}
+                    });
 
             res.send(tracksById);
         }  else if (req.query.artist) {

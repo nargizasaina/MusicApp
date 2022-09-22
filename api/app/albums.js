@@ -5,7 +5,6 @@ const path = require('path');
 
 const config = require('../config');
 const Album = require('../models/Album');
-const Track = require('../models/Track');
 
 const router = express.Router();
 
@@ -28,19 +27,6 @@ router.get('/', async (req, res) => {
                 .find({artist: req.query.artist})
                 .sort(sort)
                 .populate('artist', 'title');
-
-            // console.log(tracks);
-            // console.log(albumsById[0]._id);
-            // console.log(albumsById);
-
-            // const albums = albumsById.map(async album => {
-            //     const tracks = await Track.find({album: album._id});
-            //     // album.quantity = tracks;
-            //     // console.log(typeof tracks);
-            //     return album;
-            // });
-            //
-            // console.log(albums);
 
             res.send(albumsById);
         } else {
