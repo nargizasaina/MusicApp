@@ -1,25 +1,25 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Grid, Typography} from "@mui/material";
-import {fetchArtists} from "../../store/actions/artistsActions";
-import ArtistsList from "../../components/ArtistsList/ArtistsList";
+import {fetchAlbums} from "../../store/actions/albumsActions";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import AlbumsList from "../../components/AlbumsList/AlbumsList";
 
-const MusicAppBuilder = () => {
+const ArtistAlbums = ({match}) => {
     const dispatch = useDispatch();
-    const artists = useSelector(state => state.artists.artists);
-    const loading = useSelector(state => state.artists.loading);
+    const albums = useSelector(state => state.albums.albums);
+    const loading = useSelector(state => state.albums.loading);
 
     useEffect(() => {
-        dispatch(fetchArtists());
-    }, [dispatch]);
+        dispatch(fetchAlbums(match.params.id));
+    }, [dispatch, match.params.id]);
 
     return (
         <Grid container direction="column" spacing={2} >
             <Grid item container justifyContent="space-between" alignItems="center">
                 <Grid item>
                     <Typography variant="h5">
-                        Artists
+                        Albums of
                     </Typography>
                 </Grid>
             </Grid>
@@ -27,12 +27,13 @@ const MusicAppBuilder = () => {
             {loading
                 ? <Spinner/>
                 : <div className="List">
-                    {artists.map(artist => (
-                        <ArtistsList
-                            key={artist._id}
-                            id={artist._id}
-                            title={artist.title}
-                            image={artist.image}
+                    {albums.map(album => (
+                        <AlbumsList
+                            key={album._id}
+                            id={album._id}
+                            title={album.title}
+                            image={album.image}
+                            year={album.year}
                         />
                     ))}
                 </div>
@@ -41,4 +42,4 @@ const MusicAppBuilder = () => {
     );
 };
 
-export default MusicAppBuilder;
+export default ArtistAlbums;

@@ -20,12 +20,15 @@ const storage = multer.diskStorage({
 const upload = multer({storage});
 
 router.get('/', async (req, res) => {
+    const sort = {year: 1};
     try{
         if (req.query.artist) {
-            const albumsById = await Album.find({artist: req.query.artist});
+            const albumsById = await Album
+                .find({artist: req.query.artist})
+                .sort(sort);
             res.send(albumsById);
         } else {
-            const albums = await Album.find();
+            const albums = await Album.find().sort(sort);
             res.send(albums);
         }
 

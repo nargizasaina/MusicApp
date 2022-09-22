@@ -8,12 +8,14 @@ import artistsReducer from "./store/reducers/artistsReducer";
 import App from './App';
 import albumsReducer from "./store/reducers/albumsReducer";
 import './index.css';
+import tracksReducer from "./store/reducers/tracksReducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     artists: artistsReducer,
-    albums: albumsReducer
+    albums: albumsReducer,
+    tracks: tracksReducer
 });
 
 const store = createStore(

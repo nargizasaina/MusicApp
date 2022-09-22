@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppBar, Button, Grid, Toolbar, Typography} from "@mui/material";
+import {AppBar, Grid, Toolbar, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 import {makeStyles} from "tss-react/mui";
 
@@ -16,7 +16,6 @@ const useStyles = makeStyles()(theme => ({
     },
     staticToolbar: {
         marginBottom: theme.spacing(2),
-
     },
 }));
 
@@ -33,11 +32,6 @@ const AppToolbar = () => {
                                 Your Music Application
                             </Link>
                         </Typography>
-                        <Button
-                            // component={Link} to="/register" color="inherit"
-                        >
-                            Sign Up
-                        </Button>
                     </Grid>
 
                 </Toolbar>
