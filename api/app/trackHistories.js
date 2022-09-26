@@ -5,7 +5,21 @@ const auth = require("../middleware/auth");
 const router = express.Router();
 
 router.get('/', auth, async (req, res) => {
+    const sort = { datetime: -1 };
+    try{
+        const tracks = await TrackHistory
+            .find({user: req.user._id})
+            .sort(sort)
+            .populate(
+                {path: 'track', select: 'title',
+                    populate: {path: 'album', select: 'artist',
+                        populate: {path: 'artist', select: 'title'}},
+                });
+        console.log(tracks);
+        res.send(tracks);
+    } catch (e) {
 
+    }
 });
 
 router.post('/',auth, async (req, res) => {

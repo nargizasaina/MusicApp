@@ -1,5 +1,6 @@
 import axiosApi from "../../axiosApi";
 import {toast} from "react-toastify";
+import {historyReplace} from "./historyActions";
 
 export const FETCH_TRACK_HISTORY_REQUEST = 'FETCH_TRACK_HISTORY_REQUEST';
 export const FETCH_TRACK_HISTORY_SUCCESS = 'FETCH_TRACK_HISTORY_SUCCESS';
@@ -10,7 +11,7 @@ export const ADD_TRACK_HISTORY_SUCCESS = 'ADD_TRACK_HISTORY_SUCCESS';
 export const ADD_TRACK_HISTORY_FAILURE = 'ADD_TRACK_HISTORY_FAILURE';
 
 const fetchTrackHistoryRequest = () => ({type: FETCH_TRACK_HISTORY_REQUEST});
-const fetchTrackHistorySuccess = () => ({type: FETCH_TRACK_HISTORY_SUCCESS});
+const fetchTrackHistorySuccess = history => ({type: FETCH_TRACK_HISTORY_SUCCESS, payload: history});
 const fetchTrackHistoryFailure = (error) => ({type: FETCH_TRACK_HISTORY_FAILURE, payload: error});
 
 const addTrackHistoryRequest = () => ({type: ADD_TRACK_HISTORY_REQUEST});
@@ -18,7 +19,23 @@ const addTrackHistorySuccess = () => ({type: ADD_TRACK_HISTORY_SUCCESS});
 const addTrackHistoryFailure = (error) => ({type: ADD_TRACK_HISTORY_FAILURE, payload: error});
 
 export const fetchTrackHistory = () => {
+    return async (dispatch, getState) => {
+        try {
+            const headers = {
+                'Authorization': getState().users.user && getState().users.user.token,
+            };
 
+            dispatch(fetchTrackHistoryRequest());
+            const response = await axiosApi('/track_history', {headers});
+            dispatch(fetchTrackHistorySuccess(response.data));
+        } catch (e) {
+            if (e.response.status === 401) {
+                dispatch(historyReplace('/login'));
+            }
+
+            dispatch(fetchTrackHistoryFailure(e.message));
+        }
+    };
 };
 
 export const addTrackHistory = (track) => {

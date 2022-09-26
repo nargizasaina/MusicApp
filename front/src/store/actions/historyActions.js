@@ -5,3 +5,9 @@ export const historyPush = payload => {
         history.push(payload);
     }
 };
+
+export const historyReplace = payload => {
+    return () => {
+        history.replace(payload);
+    }
+};
