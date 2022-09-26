@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {Provider} from "react-redux";
-import {BrowserRouter} from "react-router-dom";
+import {Router} from "react-router-dom";
 import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import thunk from "redux-thunk";
 import App from './App';
+import history from "./history";
 import artistsReducer from "./store/reducers/artistsReducer";
 import albumsReducer from "./store/reducers/albumsReducer";
 import tracksReducer from "./store/reducers/tracksReducer";
@@ -27,9 +28,9 @@ const store = createStore(
 
 const app = (
     <Provider store={store}>
-        <BrowserRouter>
+        <Router history={history}>
             <App/>
-        </BrowserRouter>
+        </Router>
     </Provider>
 );
 

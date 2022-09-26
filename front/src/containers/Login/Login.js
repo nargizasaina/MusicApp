@@ -1,26 +1,26 @@
 import React, {useEffect, useState} from 'react';
-import {Box, Container, Grid, Typography} from "@mui/material";
-import {Link} from "react-router-dom";
-import LoadingButton from '@mui/lab/LoadingButton';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import InputField from "../../components/UI/InputField/InputField";
 import {useDispatch, useSelector} from "react-redux";
-import {clearRegisterErrors, registerUser} from "../../store/actions/usersActions";
+import {clearLoginErrors, loginUser} from "../../store/actions/usersActions";
+import {Alert, Box, Container, Grid, Typography} from "@mui/material";
+import InputField from "../../components/UI/InputField/InputField";
+import LoadingButton from "@mui/lab/LoadingButton";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import {Link} from "react-router-dom";
 
-const Registration = () => {
+const Login = () => {
     const dispatch = useDispatch();
-    const loading = useSelector(state => state.users.registerLoading);
-    const error = useSelector(state => state.users.registerError);
+    const loading = useSelector(state => state.users.loginLoading);
+    const error = useSelector(state => state.users.loginError);
 
     const [user, setUser] = useState({
         username: '',
-        password: '',
+        password: ''
     });
 
     useEffect(() => {
         return () => {
-            dispatch(clearRegisterErrors());
-        }
+            dispatch(clearLoginErrors());
+        };
     }, [dispatch]);
 
     const onChange = e => {
@@ -33,24 +33,21 @@ const Registration = () => {
 
     const onSubmit = e => {
         e.preventDefault();
-        dispatch(registerUser({...user}));
-        console.log(user);
-    };
-
-    const getFieldError = fieldName => {
-        try{
-            return error.errors[fieldName].message;
-        } catch {
-            return undefined;
-        }
+        dispatch(loginUser({...user}));
+        console.log('submit');
     };
 
     return (
         <Container maxWidth="xs">
             <Box sx={{paddingTop: 6}}>
                 <Typography component="h1" variant="h5" color="#fff">
-                    Sign up
+                    Sign in
                 </Typography>
+
+                {error && (
+                    <Alert sx={{width: '100%'}} severity="error">Error! {error.message}</Alert>
+                )}
+
                 <Box component="form" onSubmit={onSubmit}>
                     <InputField
                         name="username"
@@ -58,7 +55,6 @@ const Registration = () => {
                         onChange={onChange}
                         label="Username"
                         required={true}
-                        error={getFieldError('username')}
                     />
                     <InputField
                         name="password"
@@ -67,7 +63,6 @@ const Registration = () => {
                         label="Password"
                         type="password"
                         required={true}
-                        error={getFieldError('password')}
                     />
                     <LoadingButton
                         type="submit"
@@ -79,12 +74,12 @@ const Registration = () => {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Sign Up
+                        Sign In
                     </LoadingButton>
                     <Grid container justifyContent={"flex-end"}>
                         <Grid item>
-                            <Link to="/login">
-                                Already have an account? Sign in
+                            <Link to="/registration">
+                                Don't have an account? Sign Up
                             </Link>
                         </Grid>
                     </Grid>
@@ -94,4 +89,4 @@ const Registration = () => {
     );
 };
 
-export default Registration;
+export default Login;

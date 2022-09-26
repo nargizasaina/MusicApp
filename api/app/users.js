@@ -26,17 +26,18 @@ router.post('/sessions', async (req, res) => {
     const user = await User.findOne({username: req.body.username});
 
     if (!user) {
-        return res.status(401).send({error: 'Username not found!'});
+        return res.status(401).send({message: 'Credentials are wrong'});
     }
 
     const isMatch = await user.checkPassword(req.body.password);
 
     if (!isMatch) {
-        res.status(401).send({error: 'Wrong Password'});
+        res.status(401).send({message: 'Credentials are wrong'});
     }
 
     user.generateToken();
-    await user.save();
+    await user.save({validateBeforeSave: false});
+
     res.send({message: 'Username and password are correct!', user});
 });
 
