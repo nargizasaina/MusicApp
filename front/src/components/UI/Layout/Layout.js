@@ -9,7 +9,7 @@ const Layout = ({children}) => {
             <CssBaseline/>
             <AppToolbar/>
             <main className="Main">
-                <Container maxWidth="xl">
+                <Container maxWidth="xl" sx={{padding: "10px"}}>
                     {children}
                 </Container>
             </main>

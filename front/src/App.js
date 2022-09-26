@@ -4,6 +4,7 @@ import MusicAppBuilder from "./containers/MusicAppBuilder/MusicAppBuilder";
 import Layout from "./components/UI/Layout/Layout";
 import ArtistAlbums from "./containers/ArtistAlbums/ArtistAlbums";
 import AlbumTracks from "./containers/AlbumTracks/AlbumTracks";
+import Registration from "./containers/Registration/Registration";
 
 const App = () => {
     return (
@@ -12,6 +13,7 @@ const App = () => {
                 <Route path="/" exact component={MusicAppBuilder}/>
                 <Route path="/albums" component={ArtistAlbums}/>
                 <Route path="/tracks" component={AlbumTracks}/>
+                <Route path="/registration" exact component={Registration}/>
                 <Route render={() => <h1>Not Found</h1>} />
             </Switch>
         </Layout>
