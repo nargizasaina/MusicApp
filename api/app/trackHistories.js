@@ -1,26 +1,16 @@
 const express = require('express');
 const TrackHistory = require('../models/TrackHistory');
-const User = require('../models/User');
 const Track = require('../models/Track');
+const auth = require("../middleware/auth");
 const router = express.Router();
 
-router.post('/', async (req, res) => {
-    const token = req.get('Authorization');
-    if (!token) {
-        return res.status(401).send({error: 'No token present!'});
-    }
+router.get('/', auth, async (req, res) => {
 
+});
+
+router.post('/',auth, async (req, res) => {
     const track = req.body.track;
-    if (!track) {
-        return res.status(400).send({error: 'Track is not present!'});
-    }
-
-    const user = await User.findOne({token});
-    if (!user) {
-        return res.status(401).send({error: 'Wrong token!'});
-    }
-
-    const trackHistoryData = {track, user: user._id};
+    const trackHistoryData = {track, user: req.user._id};
 
     try{
         const trackInBase = await Track.findById(track);

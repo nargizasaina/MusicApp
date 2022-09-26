@@ -55,6 +55,7 @@ const Login = () => {
                         onChange={onChange}
                         label="Username"
                         required={true}
+                        autoFocus
                     />
                     <InputField
                         name="password"
