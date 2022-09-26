@@ -1,5 +1,6 @@
 import axiosApi from "../../axiosApi";
-import {historyPush} from "./historyActions";
+import {historyPush, historyReplace} from "./historyActions";
+import {toast} from "react-toastify";
 
 export const REGISTER_USER_REQUEST =  'REGISTER_USER_REQUEST';
 export const REGISTER_USER_SUCCESS =  'REGISTER_USER_SUCCESS';
@@ -28,7 +29,17 @@ export const registerUser = userData => {
 
             await axiosApi.post('/users', userData);
             dispatch(registerUserSuccess());
-            dispatch(historyPush('/'));
+            dispatch(historyReplace('/login'));
+            toast.warn('Please login using new credentials!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+
         } catch (e) {
             if(e.response && e.response.data) {
                 dispatch(registerUserFailure(e.response.data));
@@ -45,7 +56,6 @@ export const loginUser = userData => {
             dispatch(loginUserRequest());
 
             const response = await axiosApi.post('/users/sessions', userData);
-            console.log(response.data);
             dispatch(loginUserSuccess(response.data.user));
             dispatch(historyPush('/'));
         } catch (e) {

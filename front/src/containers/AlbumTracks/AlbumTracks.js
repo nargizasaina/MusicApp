@@ -17,7 +17,6 @@ const AlbumTracks = ({location}) => {
 
     const onTrackClick = id => {
         dispatch(addTrackHistory(id));
-        console.log('daone');
     };
 
     return (

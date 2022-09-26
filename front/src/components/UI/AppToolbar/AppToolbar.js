@@ -3,8 +3,10 @@ import {AppBar, Grid, Toolbar, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 import {makeStyles} from "tss-react/mui";
 import {useSelector} from "react-redux";
+import 'react-toastify/dist/ReactToastify.css';
 import UserMenu from "./Menu/UserMenu";
 import AnonymousMenu from "./Menu/AnonymousMenu";
+import {ToastContainer} from "react-toastify";
 
 const useStyles = makeStyles()(theme => ({
     appBar: {
@@ -26,6 +28,7 @@ const AppToolbar = () => {
     return (
         <>
             <AppBar position="fixed" className={classes.appBar}>
+                <ToastContainer />
                 <Toolbar>
                     <Grid container justifyContent="space-between" alignItems="center">
                         <Grid item>

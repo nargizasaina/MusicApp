@@ -15,14 +15,14 @@ router.get('/', auth, async (req, res) => {
                     populate: {path: 'album', select: 'artist',
                         populate: {path: 'artist', select: 'title'}},
                 });
-        console.log(tracks);
-        res.send(tracks);
-    } catch (e) {
 
+        res.send(tracks);
+    } catch {
+        res.sendStatus(500);
     }
 });
 
-router.post('/',auth, async (req, res) => {
+router.post('/', auth, async (req, res) => {
     const track = req.body.track;
     const trackHistoryData = {track, user: req.user._id};
 
@@ -40,7 +40,6 @@ router.post('/',auth, async (req, res) => {
     } catch (e) {
         res.status(400).send(e);
     }
-
 });
 
 module.exports = router;

@@ -41,9 +41,7 @@ export const fetchTrackHistory = () => {
 export const addTrackHistory = (track) => {
     return async (dispatch, getState) => {
         try {
-            const body = {
-                track
-            };
+            const body = {track};
 
             const headers = {
                 'Authorization': getState().users.user && getState().users.user.token,
@@ -56,14 +54,13 @@ export const addTrackHistory = (track) => {
             if (e.response.status === 401) {
                 toast.warn('Please login!', {
                     position: "top-right",
-                    autoClose: 5000,
+                    autoClose: 2000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
                 });
-                console.log(e);
             }
 
             dispatch(addTrackHistoryFailure(e.message));

@@ -34,7 +34,6 @@ const Registration = () => {
     const onSubmit = e => {
         e.preventDefault();
         dispatch(registerUser({...user}));
-        console.log(user);
     };
 
     const getFieldError = fieldName => {

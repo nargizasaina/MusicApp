@@ -34,7 +34,6 @@ const Login = () => {
     const onSubmit = e => {
         e.preventDefault();
         dispatch(loginUser({...user}));
-        console.log('submit');
     };
 
     return (
@@ -55,7 +54,6 @@ const Login = () => {
                         onChange={onChange}
                         label="Username"
                         required={true}
-                        autoFocus
                     />
                     <InputField
                         name="password"
