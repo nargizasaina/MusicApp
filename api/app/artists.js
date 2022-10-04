@@ -41,7 +41,7 @@ router.post('/', upload.single('image'), async (req, res) => {
     };
 
     if (req.file) {
-        artistData.image = req.file.filename;
+        artistData.image = 'uploads/' + req.file.filename;
     }
 
     try {

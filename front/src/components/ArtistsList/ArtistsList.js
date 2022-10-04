@@ -12,7 +12,7 @@ const ArtistsList = ({id, title, image}) => {
     let artistImage = musicImage;
 
     if (image) {
-        artistImage = apiUrl + '/uploads/' + image;
+        artistImage = apiUrl + '/' + image;
     }
 
     return (

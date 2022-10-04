@@ -7,7 +7,7 @@ import Card from "@mui/material/Card";
 import {Link} from "react-router-dom";
 
 const AlbumsList = ({id, year, title, image}) => {
-    const albumImage = apiUrl + '/uploads/' + image;
+    const albumImage = apiUrl + '/' + image;
 
     return (
         <Card sx={{ width: 250, margin: "10px" }} >

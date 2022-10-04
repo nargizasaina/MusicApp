@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const {nanoid} = require('nanoid');
-
 const Schema = mongoose.Schema;
 const SALT_WORK_FACTOR = 10;
 
@@ -27,6 +26,12 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
+    role: {
+        required: true,
+        type: String,
+        default: 'user',
+        enum: ['admin', 'user']
+    }
 });
 
 UserSchema.pre('save', async function (next){

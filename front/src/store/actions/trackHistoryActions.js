@@ -1,6 +1,6 @@
 import axiosApi from "../../axiosApi";
-import {toast} from "react-toastify";
 import {historyReplace} from "./historyActions";
+import {useToastInfo} from "../../toastHooks";
 
 export const FETCH_TRACK_HISTORY_REQUEST = 'FETCH_TRACK_HISTORY_REQUEST';
 export const FETCH_TRACK_HISTORY_SUCCESS = 'FETCH_TRACK_HISTORY_SUCCESS';
@@ -31,6 +31,7 @@ export const fetchTrackHistory = () => {
         } catch (e) {
             if (e.response.status === 401) {
                 dispatch(historyReplace('/login'));
+                useToastInfo('Please login!');
             }
 
             dispatch(fetchTrackHistoryFailure(e.message));
@@ -52,15 +53,7 @@ export const addTrackHistory = (track) => {
             dispatch(addTrackHistorySuccess());
         } catch (e) {
             if (e.response.status === 401) {
-                toast.warn('Please login!', {
-                    position: "top-right",
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
+                useToastInfo('Please login!');
             }
 
             dispatch(addTrackHistoryFailure(e.message));

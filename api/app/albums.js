@@ -64,7 +64,7 @@ router.post('/', upload.single('image'), async (req, res) => {
         title,
         artist,
         year,
-        image: req.file.filename,
+        image: 'uploads/' + req.file.filename,
     };
 
     try {
