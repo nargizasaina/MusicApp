@@ -21,7 +21,7 @@ const upload = multer({storage});
 
 router.get('/', async (req, res) => {
     try{
-        const artists = await Artist.find();
+        const artists = await Artist.find({}, 'title image');
         res.send(artists);
     } catch {
         res.sendStatus(500);
@@ -30,9 +30,6 @@ router.get('/', async (req, res) => {
 
 router.post('/', upload.single('image'), async (req, res) => {
     const {title, description} = req.body;
-    if (!title) {
-        return res.status(400).send({error: 'Title is not entered'});
-    }
 
     const artistData = {
         title,

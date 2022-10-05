@@ -37,9 +37,6 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const {title, album, length} = req.body;
-    if (!title || !album || !length) {
-        return res.status(400).send({error: 'Data is not valid'});
-    }
 
     let number = 1;
     const tracks = await Track.find();

@@ -10,6 +10,12 @@ const ArtistSchema = new Schema({
     },
     image: String,
     description: String,
+    publish: {
+        required: true,
+        type: Boolean,
+        default: false,
+        enum: [false, true]
+    }
 });
 
 ArtistSchema.plugin(uniqueValidator, {message: 'Error, expected {PATH} to be unique.'});

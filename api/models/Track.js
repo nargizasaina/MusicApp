@@ -19,6 +19,12 @@ const TrackSchema = new Schema({
     number: {
         type: Number,
         required: true
+    },
+    publish: {
+        required: true,
+        type: Boolean,
+        default: false,
+        enum: [false, true]
     }
 });
 

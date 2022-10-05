@@ -3,7 +3,7 @@ import {Box, Container, Grid, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 import LoadingButton from '@mui/lab/LoadingButton';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import InputField from "../../components/UI/InputField/InputField";
+import InputField from "../../components/UI/Form/InputField/InputField";
 import {useDispatch, useSelector} from "react-redux";
 import {clearRegisterErrors, registerUser} from "../../store/actions/usersActions";
 

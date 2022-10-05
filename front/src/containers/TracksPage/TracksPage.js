@@ -4,7 +4,7 @@ import {Container, Typography} from "@mui/material";
 import {fetchTracks} from "../../store/actions/tracksActions";
 import {addTrackHistory} from "../../store/actions/trackHistoryActions";
 
-const AlbumTracks = ({location}) => {
+const TracksPage = ({location}) => {
     const dispatch = useDispatch();
     const tracks = useSelector(state => state.tracks.tracks);
     const user = useSelector(state => state.users.user);
@@ -45,4 +45,4 @@ const AlbumTracks = ({location}) => {
     );
 };
 
-export default AlbumTracks;
+export default TracksPage;

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {clearLoginErrors, loginUser} from "../../store/actions/usersActions";
 import {Alert, Box, Container, Grid, Typography} from "@mui/material";
-import InputField from "../../components/UI/InputField/InputField";
+import InputField from "../../components/UI/Form/InputField/InputField";
 import LoadingButton from "@mui/lab/LoadingButton";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {Link} from "react-router-dom";

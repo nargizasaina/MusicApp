@@ -1,0 +1,104 @@
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {Grid, Typography} from "@mui/material";
+import {addTrack} from "../../store/actions/tracksActions";
+import FormSelect from "../../components/UI/Form/FormSelect/FormSelect";
+import {fetchAllAlbums} from "../../store/actions/albumsActions";
+import InputField from "../../components/UI/Form/InputField/InputField";
+import ButtonWithProgress from "../../components/UI/ButtonWithProgress/ButtonWithProgress";
+
+const AddTrack = () => {
+    const dispatch = useDispatch();
+    const albums = useSelector(state => state.albums.allAlbums);
+    const error = useSelector(state => state.tracks.addError);
+    const loading = useSelector(state => state.tracks.addLoading);
+
+    const [track, setTrack] = useState({
+        title: '',
+        album: '',
+        length: '',
+    });
+
+    useEffect(() => {
+        dispatch(fetchAllAlbums());
+    }, [dispatch]);
+
+    const onChange = e => {
+        const {name, value} = e.target;
+        setTrack(prevState => ({...prevState, [name]: value}));
+    };
+
+    const onSubmit = e => {
+        e.preventDefault();
+        dispatch(addTrack(track));
+    };
+
+    const getFieldError = fieldName => {
+        try{
+            return error.error[fieldName].message;
+        } catch {
+            return undefined;
+        }
+    };
+
+    return (
+        <>
+            <Typography
+                textAlign="center"
+                marginBottom="20px"
+                variant="h4"
+            >
+                New track
+            </Typography>
+            <form
+                autoComplete="off"
+                onSubmit={onSubmit}
+            >
+                <Grid
+                    container
+                    maxWidth="md"
+                    textAlign="center"
+                    marginX="auto"
+                    direction="column"
+                    rowSpacing={2}
+                >
+                    <FormSelect
+                        onChange={onChange}
+                        name='album'
+                        options={albums}
+                        label='Album'
+                        value={track.album}
+                        error={getFieldError('album')}
+                    />
+                    <InputField
+                        onChange={onChange}
+                        name="title"
+                        label='Title'
+                        value={track.title}
+                        error={getFieldError('title')}
+                    />
+                    <InputField
+                        onChange={onChange}
+                        name="length"
+                        label='Track length'
+                        value={track.length}
+                        error={getFieldError('length')}
+                    />
+
+                    <Grid item>
+                        <ButtonWithProgress
+                            type="submit"
+                            color="primary"
+                            variant="contained"
+                            loading={loading}
+                        >
+                            Create
+                        </ButtonWithProgress>
+                    </Grid>
+                </Grid>
+            </form>
+        </>
+    );
+};
+
+export default AddTrack;

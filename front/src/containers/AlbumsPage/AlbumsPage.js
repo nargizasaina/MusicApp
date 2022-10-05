@@ -5,9 +5,9 @@ import {fetchAlbums} from "../../store/actions/albumsActions";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import AlbumsList from "../../components/AlbumsList/AlbumsList";
 
-const ArtistAlbums = ({location}) => {
+const AlbumsPage = ({location}) => {
     const dispatch = useDispatch();
-    const albums = useSelector(state => state.albums.albums);
+    const albums = useSelector(state => state.albums.albumsById);
     const loading = useSelector(state => state.albums.loading);
 
     useEffect(() => {
@@ -48,4 +48,4 @@ const ArtistAlbums = ({location}) => {
     );
 };
 
-export default ArtistAlbums;
+export default AlbumsPage;

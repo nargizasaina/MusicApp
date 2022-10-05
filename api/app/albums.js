@@ -56,15 +56,12 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', upload.single('image'), async (req, res) => {
     const {title, artist, year} = req.body;
-    if (!title || !artist || !year || !req.file) {
-        return res.status(400).send({error: 'Data is not valid'});
-    }
 
     const albumData = {
         title,
         artist,
         year,
-        image: 'uploads/' + req.file.filename,
+        image: req.file && 'uploads/' + req.file.filename,
     };
 
     try {
