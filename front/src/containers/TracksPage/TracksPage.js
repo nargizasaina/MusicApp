@@ -6,7 +6,7 @@ import {addTrackHistory} from "../../store/actions/trackHistoryActions";
 
 const TracksPage = ({location}) => {
     const dispatch = useDispatch();
-    const tracks = useSelector(state => state.tracks.tracks);
+    const tracks = useSelector(state => state.tracks.tracksById);
     const user = useSelector(state => state.users.user);
 
     useEffect(() => {
@@ -30,6 +30,7 @@ const TracksPage = ({location}) => {
                 </Typography> }
             <ul>
                 {tracks.map(track => (
+                    track.publish &&
                     <li
                         key={track._id}
                         style={user ? {cursor: 'pointer'} : {cursor: 'default'}}

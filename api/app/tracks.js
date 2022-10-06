@@ -1,6 +1,8 @@
 const express = require('express');
 const Track = require('../models/Track');
 const Album = require('../models/Album');
+const auth = require("../middleware/auth");
+const permit = require("../middleware/permit");
 
 const router = express.Router();
 
@@ -26,7 +28,7 @@ router.get('/', async (req, res) => {
 
             res.send(tracks);
         } else {
-                const tracks = await Track.find().sort(sort);
+                const tracks = await Track.find().sort(sort).populate('album', 'title');
                 res.send(tracks);
         }
 
@@ -57,6 +59,20 @@ router.post('/', async (req, res) => {
         res.send(track);
     } catch (e) {
         res.status(400).send({error: e.errors});
+    }
+});
+
+router.post('/:id/publish', auth, permit('admin'), async (req, res) => {
+    const track = await Track.findById(req.params.id);
+    console.log(track);
+});
+
+router.delete('/:id', auth, permit('admin'), async (req, res) => {
+    try{
+        await Track.findByIdAndDelete(req.params.id);
+        res.send('Track is deleted successfully!');
+    } catch {
+        res.sendStatus(500);
     }
 });
 

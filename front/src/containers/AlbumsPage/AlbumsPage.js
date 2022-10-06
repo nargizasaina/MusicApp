@@ -34,6 +34,7 @@ const AlbumsPage = ({location}) => {
                 ? <Spinner/>
                 : <div className="List">
                     {albums.map(album => (
+                        album.publish &&
                         <AlbumsList
                             key={album._id}
                             id={album._id}

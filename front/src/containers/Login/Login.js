@@ -54,6 +54,7 @@ const Login = () => {
                         onChange={onChange}
                         label="Username"
                         required={true}
+                        margin="normal"
                     />
                     <InputField
                         name="password"
@@ -62,6 +63,7 @@ const Login = () => {
                         label="Password"
                         type="password"
                         required={true}
+                        margin="normal"
                     />
                     <LoadingButton
                         type="submit"

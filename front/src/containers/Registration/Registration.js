@@ -58,6 +58,7 @@ const Registration = () => {
                         label="Username"
                         required={true}
                         error={getFieldError('username')}
+                        margin="normal"
                     />
                     <InputField
                         name="password"
@@ -67,6 +68,7 @@ const Registration = () => {
                         type="password"
                         required={true}
                         error={getFieldError('password')}
+                        margin="normal"
                     />
                     <LoadingButton
                         type="submit"

@@ -28,6 +28,7 @@ const MusicAppBuilder = () => {
                 ? <Spinner/>
                 : <div className="List">
                     {artists.map(artist => (
+                        artist.publish &&
                         <ArtistsList
                             key={artist._id}
                             id={artist._id}

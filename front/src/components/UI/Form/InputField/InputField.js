@@ -2,7 +2,7 @@ import React from 'react';
 import {Grid, TextField} from "@mui/material";
 import PropTypes from 'prop-types';
 
-const InputField = ({name, value, onChange, label, error, type, required}) => {
+const InputField = ({name, value, onChange, label, error, type, required, margin}) => {
     return (
         <Grid item xs={12}>
             <TextField
@@ -16,7 +16,7 @@ const InputField = ({name, value, onChange, label, error, type, required}) => {
                 helperText={error}
                 autoComplete={name}
                 fullWidth
-                // margin="normal"
+                margin={margin}
             />
         </Grid>
     );
@@ -29,7 +29,8 @@ InputField.propTypes = {
     label: PropTypes.string.isRequired,
     error: PropTypes.string,
     type: PropTypes.string,
-    required: PropTypes.bool
+    required: PropTypes.bool,
+    margin: PropTypes.string
 };
 
 export default InputField;

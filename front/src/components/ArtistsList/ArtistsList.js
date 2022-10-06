@@ -2,13 +2,15 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import {CardActionArea} from '@mui/material';
+import {Box, Button, CardActionArea} from '@mui/material';
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 import musicImage from '../../assets/music.jpg';
 import {apiUrl} from "../../config";
 import './ArtistsList.css';
 
 const ArtistsList = ({id, title, image}) => {
+    const user = useSelector(state => state.users.user);
     let artistImage = musicImage;
 
     if (image) {
@@ -28,6 +30,12 @@ const ArtistsList = ({id, title, image}) => {
                     {title}
                 </Typography>
             </CardActionArea>
+            {user?.role === 'admin' &&
+                <Box display="flex" justifyContent="space-around" sx={{background: 'lightGrey'}}>
+                    <Button type="button" color='error'>Delete</Button>
+                    <Button type="button" color='success'>Publish</Button>
+                </Box>
+            }
         </Card>
     );
 };

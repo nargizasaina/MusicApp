@@ -21,10 +21,13 @@ const UserMenu = ({user}) => {
     };
 
     return (
-        <Box display="flex" justifyContent="space-between" alignItems="center">
-            <Button component={Link} to="/track_history" color="inherit" sx={{marginRight: 20}}>
-                Track History
-            </Button>
+        <Box display="flex" justifyContent="space-between" alignItems="center" paddingTop={1}>
+            {user.role === 'user' &&
+                <Button component={Link} to="/track_history" color="inherit"
+                        sx={{marginRight: '20px', '&:hover': {color: 'blue'}}}>
+                    Track History
+                </Button>
+            }
             <Box
                 sx={{
                     display: 'flex',
@@ -53,9 +56,14 @@ const UserMenu = ({user}) => {
                     'aria-labelledby': 'basic-button',
                 }}
             >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={() => dispatch(logoutUser())}>Logout</MenuItem>
+                {user.role === 'user' ?
+                    <>
+                        <MenuItem onClick={handleClose} component={Link} to="/artists/new" color="inherit">Add Artist</MenuItem>
+                        <MenuItem onClick={handleClose} component={Link} to="/albums/new" color="inherit">Add Album</MenuItem>
+                        <MenuItem onClick={handleClose} component={Link} to="/tracks/new" color="inherit">Add Track</MenuItem>
+                        <MenuItem onClick={() => dispatch(logoutUser())}>Logout</MenuItem>
+                    </> :
+                    <MenuItem onClick={() => dispatch(logoutUser())}>Logout</MenuItem>}
             </Menu>
         </Box>
     );
