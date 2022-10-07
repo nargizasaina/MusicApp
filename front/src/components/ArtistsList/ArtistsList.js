@@ -9,7 +9,7 @@ import musicImage from '../../assets/music.jpg';
 import {apiUrl} from "../../config";
 import './ArtistsList.css';
 
-const ArtistsList = ({id, title, image}) => {
+const ArtistsList = ({id, title, image, publish}) => {
     const user = useSelector(state => state.users.user);
     let artistImage = musicImage;
 
@@ -26,9 +26,17 @@ const ArtistsList = ({id, title, image}) => {
                     image={artistImage}
                     alt="artist"
                 />
-                <Typography variant="h6" paddingLeft={1}>
-                    {title}
-                </Typography>
+                <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+                    <Typography variant="h6" paddingLeft={1}>
+                        {title}
+                    </Typography>
+                    {!publish &&
+                        <Typography sx={{ fontSize: 12 }} variant="body2" color="text.secondary">
+                            Unpublished!
+                        </Typography>
+                    }
+                </Box>
+
             </CardActionArea>
             {user?.role === 'admin' &&
                 <Box display="flex" justifyContent="space-around" sx={{background: 'lightGrey'}}>

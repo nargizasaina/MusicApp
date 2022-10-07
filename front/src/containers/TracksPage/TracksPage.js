@@ -28,20 +28,24 @@ const TracksPage = ({location}) => {
                 : <Typography variant="h5">
                     There are no tracks in this album
                 </Typography> }
-            <ul>
                 {tracks.map(track => (
-                    track.publish &&
-                    <li
+                    (track.publish || (!track.publish && track.addedBy === user?._id)) &&
+                    <div
                         key={track._id}
-                        style={user ? {cursor: 'pointer'} : {cursor: 'default'}}
+                        style={user ? {cursor: 'pointer', margin: '6px 0'} : {cursor: 'default', margin: '6px 0'}}
                         onClick={() => onTrackClick(track._id)}
                     >
                         Track number: <b> {track.number} </b> <br/>
                         Song: <b>{track.title} </b> <br/>
-                        Song length: <b>{track.length}</b>
-                    </li>
+                        Song length: <b>{track.length}</b> <br/>
+                        {!track.publish &&
+                            <Typography sx={{ fontSize: 12 }} variant="body2" color="text.secondary">
+                                Unpublished!
+                            </Typography>
+                        }
+                        <hr/>
+                    </div>
                 ))}
-            </ul>
         </Container>
     );
 };

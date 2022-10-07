@@ -9,6 +9,7 @@ const MusicAppBuilder = () => {
     const dispatch = useDispatch();
     const artists = useSelector(state => state.artists.artists);
     const loading = useSelector(state => state.artists.loading);
+    const user = useSelector(state => state.users.user);
 
     useEffect(() => {
         dispatch(fetchArtists());
@@ -23,17 +24,17 @@ const MusicAppBuilder = () => {
                     </Typography>
                 </Grid>
             </Grid>
-
             {loading
                 ? <Spinner/>
                 : <div className="List">
                     {artists.map(artist => (
-                        artist.publish &&
+                        (artist.publish || (!artist.publish && artist.addedBy === user?._id)) &&
                         <ArtistsList
                             key={artist._id}
                             id={artist._id}
                             title={artist.title}
                             image={artist.image}
+                            publish={artist.publish}
                         />
                     ))}
                 </div>

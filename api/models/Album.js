@@ -15,6 +15,8 @@ const AlbumSchema = new Schema({
     year: {
         type: Number,
         required: true,
+        min: 1000,
+        max: 2023
     },
     image: {
         type: String,
@@ -25,6 +27,11 @@ const AlbumSchema = new Schema({
         type: Boolean,
         default: false,
         enum: [false, true]
+    },
+    addedBy: {
+        required: true,
+        type: Schema.Types.ObjectId,
+        ref: 'User',
     }
 });
 

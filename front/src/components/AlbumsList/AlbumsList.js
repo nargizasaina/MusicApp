@@ -1,12 +1,12 @@
 import React from 'react';
 import {apiUrl} from "../../config";
-import {CardActionArea} from "@mui/material";
+import {Box, CardActionArea} from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import {Link} from "react-router-dom";
 
-const AlbumsList = ({id, year, title, image}) => {
+const AlbumsList = ({id, year, title, image, publish}) => {
     const albumImage = apiUrl + '/' + image;
 
     return (
@@ -21,9 +21,16 @@ const AlbumsList = ({id, year, title, image}) => {
                 <Typography paddingLeft={0.5}>
                     <i>Title of album: </i><b>{title}</b>
                 </Typography>
-                <Typography paddingLeft={0.5}>
-                    <i>Year of release: </i><b>{year}</b>
-                </Typography>
+                <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+                    <Typography paddingLeft={0.5}>
+                        <i>Year of release: </i><b>{year}</b>
+                    </Typography>
+                    {!publish &&
+                        <Typography sx={{ fontSize: 12 }} variant="body2" color="text.secondary">
+                            Unpublished!
+                        </Typography>
+                    }
+                </Box>
             </CardActionArea>
         </Card>
     );

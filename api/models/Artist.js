@@ -15,6 +15,11 @@ const ArtistSchema = new Schema({
         type: Boolean,
         default: false,
         enum: [false, true]
+    },
+    addedBy: {
+        required: true,
+        type: Schema.Types.ObjectId,
+        ref: 'User',
     }
 });
 

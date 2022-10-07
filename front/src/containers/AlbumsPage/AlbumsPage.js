@@ -9,6 +9,7 @@ const AlbumsPage = ({location}) => {
     const dispatch = useDispatch();
     const albums = useSelector(state => state.albums.albumsById);
     const loading = useSelector(state => state.albums.loading);
+    const user = useSelector(state => state.users.user);
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
@@ -34,13 +35,14 @@ const AlbumsPage = ({location}) => {
                 ? <Spinner/>
                 : <div className="List">
                     {albums.map(album => (
-                        album.publish &&
+                        (album.publish || (!album.publish && album.addedBy === user?._id)) &&
                         <AlbumsList
                             key={album._id}
                             id={album._id}
                             title={album.title}
                             image={album.image}
                             year={album.year}
+                            publish={album.publish}
                         />
                     ))}
                 </div>

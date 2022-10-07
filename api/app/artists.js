@@ -30,13 +30,14 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/', upload.single('image'), async (req, res) => {
+router.post('/', auth, upload.single('image'), async (req, res) => {
     const {title, description} = req.body;
 
     const artistData = {
         title,
         image: null,
         description: description || null,
+        addedBy: req.user._id
     };
 
     if (req.file) {

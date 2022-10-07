@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     const {title, album, length} = req.body;
 
     let number = 1;
@@ -50,7 +50,8 @@ router.post('/', async (req, res) => {
         title,
         album,
         length,
-        number
+        number,
+        addedBy: req.user._id
     };
 
     try {
