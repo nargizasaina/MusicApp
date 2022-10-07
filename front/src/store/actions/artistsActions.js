@@ -40,7 +40,6 @@ export const fetchArtists = () => {
             dispatch(fetchArtistsRequest());
 
             const response = await axiosApi('/artists');
-
             dispatch(fetchArtistsSuccess(response.data));
 
         } catch (e) {
@@ -54,8 +53,6 @@ export const addArtist = data => {
         try {
             dispatch(addArtistRequest());
             await axiosApi.post('/artists', data);
-
-            console.log(data);
 
             dispatch(addArtistSuccess());
             dispatch(historyReplace('/'));

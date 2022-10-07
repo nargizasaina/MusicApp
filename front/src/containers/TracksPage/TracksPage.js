@@ -32,8 +32,8 @@ const TracksPage = ({location}) => {
                     (track.publish || (!track.publish && track.addedBy === user?._id)) &&
                     <div
                         key={track._id}
-                        style={user ? {cursor: 'pointer', margin: '6px 0'} : {cursor: 'default', margin: '6px 0'}}
-                        onClick={() => onTrackClick(track._id)}
+                        style={(user && track.publish) ? {cursor: 'pointer', margin: '6px 0'} : {cursor: 'default', margin: '6px 0'}}
+                        onClick={track.publish ? (() => onTrackClick(track._id)) : null}
                     >
                         Track number: <b> {track.number} </b> <br/>
                         Song: <b>{track.title} </b> <br/>

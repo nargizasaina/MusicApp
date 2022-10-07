@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', auth, async (req, res) => {
-    const {title, album, length} = req.body;
+    const {title, album, length, artist} = req.body;
 
     let number = 1;
     const tracks = await Track.find();
@@ -49,6 +49,7 @@ router.post('/', auth, async (req, res) => {
     const trackData = {
         title,
         album,
+        artist,
         length,
         number,
         addedBy: req.user._id
@@ -64,8 +65,6 @@ router.post('/', auth, async (req, res) => {
 });
 
 router.post('/:id/publish', auth, permit('admin'), async (req, res) => {
-    console.log(req.params.id);
-
     try{
         const track = await Track.findById(req.params.id);
         if (!track) {

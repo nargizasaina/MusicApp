@@ -24,9 +24,10 @@ const TrackHistory = () => {
                 {trackHistory.map(history => (
                     <li
                         key={history._id}
+                        style={{margin: '8px 0'}}
                     >
-                        Artist: <b> {history.track.album.artist.title} </b> <br/>
-                        Song: <b>{history.track.title} </b> <br/>
+                        Artist: <b> {history.track?.album.artist.title} </b> <br/>
+                        Song: <b>{history.track?.title} </b> <br/>
                         Date and time you listened: <b>{new Date(history.datetime).toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})}</b>
                     </li>
                 ))}

@@ -22,6 +22,11 @@ const MusicAppBuilder = () => {
                     <Typography variant="h5">
                         Artists
                     </Typography>
+                    {artists.length < 1 &&
+                        <Typography variant="body">
+                        There are no Artists. Please add...
+                    </Typography>
+                    }
                 </Grid>
             </Grid>
             {loading

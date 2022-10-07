@@ -1,6 +1,6 @@
 import axiosApi from "../../axiosApi";
 import {historyReplace} from "./historyActions";
-import {useToastInfo} from "../../toastHooks";
+import {useToastInfo, useToastSuccess} from "../../toastHooks";
 
 export const FETCH_TRACK_HISTORY_REQUEST = 'FETCH_TRACK_HISTORY_REQUEST';
 export const FETCH_TRACK_HISTORY_SUCCESS = 'FETCH_TRACK_HISTORY_SUCCESS';
@@ -51,6 +51,7 @@ export const addTrackHistory = (track) => {
             dispatch(addTrackHistoryRequest());
             await axiosApi.post('/track_history', body, {headers});
             dispatch(addTrackHistorySuccess());
+            useToastSuccess('Track is added to Your track history');
         } catch (e) {
             if (e.response.status === 401) {
                 useToastInfo('Please login!');

@@ -15,7 +15,7 @@ const AlbumSchema = new Schema({
     year: {
         type: Number,
         required: true,
-        min: 1000,
+        min: 1900,
         max: 2023
     },
     image: {

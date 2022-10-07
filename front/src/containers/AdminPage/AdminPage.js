@@ -33,7 +33,6 @@ const AdminPage = () => {
     };
 
     const onTrackPublish = async id => {
-        console.log(id);
         await dispatch(publishTrack(id));
         dispatch(fetchAllTracks());
     };

@@ -12,6 +12,11 @@ const TrackSchema = new Schema({
         ref: 'Album',
         required: true,
     },
+    artist: {
+        type: Schema.Types.ObjectId,
+        ref: 'Artist',
+        required: true,
+    },
     length: {
         type: String,
         required: true,

@@ -84,6 +84,7 @@ const run = async () => {
     await Track.create({
         title: 'X',
         album: albumX._id,
+        artist: artistEd._id,
         length: '2:40',
         number: 1,
         publish: false,
@@ -91,6 +92,7 @@ const run = async () => {
     }, {
         title: 'Xy',
         album: albumX._id,
+        artist: artistEd._id,
         length: '2:45',
         number: 2,
         publish: false,
@@ -98,6 +100,7 @@ const run = async () => {
     }, {
         title: 'Xa',
         album: albumX._id,
+        artist: artistEd._id,
         length: '2:55',
         number: 3,
         publish: false,
@@ -105,6 +108,7 @@ const run = async () => {
     }, {
         title: 'Xoxox',
         album: albumX._id,
+        artist: artistEd._id,
         length: '3:45',
         number: 4,
         publish: true,
@@ -112,6 +116,7 @@ const run = async () => {
     }, {
         title: 'Xo',
         album: albumX._id,
+        artist: artistEd._id,
         length: '3:25',
         number: 5,
         publish: true,
@@ -119,6 +124,7 @@ const run = async () => {
     }, {
         title: 'My Way',
         album: albumMyWay._id,
+        artist: artistFrank._id,
         length: '4:45',
         number: 6,
         publish: true,
@@ -126,6 +132,7 @@ const run = async () => {
     }, {
         title: 'Your Way',
         album: albumMyWay._id,
+        artist: artistFrank._id,
         length: '4:55',
         number: 7,
         publish: true,
@@ -133,6 +140,7 @@ const run = async () => {
     }, {
         title: 'My Ways',
         album: albumMyWay._id,
+        artist: artistFrank._id,
         length: '2:45',
         number: 8,
         publish: true,
@@ -140,6 +148,7 @@ const run = async () => {
     }, {
         title: 'My',
         album: albumMyWay._id,
+        artist: artistFrank._id,
         length: '4:15',
         number: 9,
         publish: true,
@@ -147,6 +156,7 @@ const run = async () => {
     }, {
         title: 'Way',
         album: albumMyWay._id,
+        artist: artistFrank._id,
         length: '4:05',
         number: 10,
         publish: true,
@@ -154,6 +164,7 @@ const run = async () => {
     }, {
         title: 'Not My Way',
         album: albumMyWay._id,
+        artist: artistFrank._id,
         length: '4:40',
         number: 11,
         publish: false,
@@ -161,6 +172,7 @@ const run = async () => {
     }, {
         title: 'Swing',
         album: albumSwing._id,
+        artist: artistFrank._id,
         length: '4:40',
         number: 12,
         publish: false,
@@ -168,6 +180,7 @@ const run = async () => {
     }, {
         title: 'My Swing',
         album: albumSwing._id,
+        artist: artistFrank._id,
         length: '4:10',
         number: 13,
         publish: true,
@@ -175,6 +188,7 @@ const run = async () => {
     }, {
         title: 'Swing With Me',
         album: albumSwing._id,
+        artist: artistFrank._id,
         length: '4:00',
         number: 14,
         publish: true,
@@ -182,6 +196,7 @@ const run = async () => {
     }, {
         title: 'Swing By Me',
         album: albumSwing._id,
+        artist: artistFrank._id,
         length: '3:40',
         number: 15,
         publish: true,
@@ -189,6 +204,7 @@ const run = async () => {
     }, {
         title: 'Swing For Me',
         album: albumSwing._id,
+        artist: artistFrank._id,
         length: '2:40',
         number: 16,
         publish: true,
@@ -196,6 +212,7 @@ const run = async () => {
     }, {
         title: 'Swing and Dance',
         album: albumSwing._id,
+        artist: artistFrank._id,
         length: '1:40',
         number: 17,
         publish: true,
@@ -203,6 +220,7 @@ const run = async () => {
     }, {
         title: 'JustSwing',
         album: albumSwing._id,
+        artist: artistFrank._id,
         length: '5:40',
         number: 18,
         publish: true,
@@ -210,6 +228,7 @@ const run = async () => {
     }, {
         title: 'Future Nostalgia',
         album: albumFuture._id,
+        artist: artistDua._id,
         length: '5:20',
         number: 19,
         publish: true,
@@ -217,6 +236,7 @@ const run = async () => {
     }, {
         title: 'Future',
         album: albumFuture._id,
+        artist: artistDua._id,
         length: '4:40',
         number: 20,
         publish: true,
@@ -224,6 +244,7 @@ const run = async () => {
     }, {
         title: 'Nostalgia',
         album: albumFuture._id,
+        artist: artistDua._id,
         length: '3:40',
         number: 21,
         publish: true,
@@ -231,6 +252,7 @@ const run = async () => {
     }, {
         title: 'Present Nostalgia',
         album: albumFuture._id,
+        artist: artistDua._id,
         length: '2:40',
         number: 22,
         publish: true,
@@ -238,6 +260,7 @@ const run = async () => {
     }, {
         title: 'Future Memories',
         album: albumFuture._id,
+        artist: artistDua._id,
         length: '5:45',
         number: 23,
         publish: true,
@@ -245,6 +268,7 @@ const run = async () => {
     }, {
         title: 'Past Nostalgia',
         album: albumFuture._id,
+        artist: artistDua._id,
         length: '5:40',
         number: 24,
         publish: true,
@@ -252,6 +276,7 @@ const run = async () => {
     }, {
         title: 'Past Memories',
         album: albumFuture._id,
+        artist: artistDua._id,
         length: '5:47',
         number: 25,
         publish: true,
@@ -259,6 +284,7 @@ const run = async () => {
     }, {
         title: 'Just Me',
         album: albumFuture._id,
+        artist: artistDua._id,
         length: '5:00',
         number: 26,
         publish: true,

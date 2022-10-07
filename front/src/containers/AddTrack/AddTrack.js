@@ -3,13 +3,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {Grid, Typography} from "@mui/material";
 import {addTrack} from "../../store/actions/tracksActions";
 import FormSelect from "../../components/UI/Form/FormSelect/FormSelect";
-import {fetchAllAlbums} from "../../store/actions/albumsActions";
+import {fetchAlbums} from "../../store/actions/albumsActions";
 import InputField from "../../components/UI/Form/InputField/InputField";
 import ButtonWithProgress from "../../components/UI/ButtonWithProgress/ButtonWithProgress";
+import {fetchArtists} from "../../store/actions/artistsActions";
 
 const AddTrack = () => {
     const dispatch = useDispatch();
-    const albums = useSelector(state => state.albums.allAlbums);
+    const artists = useSelector(state => state.artists.artists);
+    const albums = useSelector(state => state.albums.albumsById);
     const error = useSelector(state => state.tracks.addError);
     const loading = useSelector(state => state.tracks.addLoading);
 
@@ -17,11 +19,16 @@ const AddTrack = () => {
         title: '',
         album: '',
         length: '',
+        artist: ''
     });
 
     useEffect(() => {
-        dispatch(fetchAllAlbums());
+        dispatch(fetchArtists());
     }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(fetchAlbums(track.artist));
+    }, [dispatch, track.artist]);
 
     const onChange = e => {
         const {name, value} = e.target;
@@ -62,6 +69,14 @@ const AddTrack = () => {
                     direction="column"
                     rowSpacing={2}
                 >
+                    <FormSelect
+                        onChange={onChange}
+                        name='artist'
+                        options={artists}
+                        label='Artist'
+                        value={track.artist}
+                        error={getFieldError('artist')}
+                    />
                     <FormSelect
                         onChange={onChange}
                         name='album'
