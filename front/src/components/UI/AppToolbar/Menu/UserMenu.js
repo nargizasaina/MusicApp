@@ -47,6 +47,7 @@ const UserMenu = ({user}) => {
                     <VerifiedUserIcon sx={{marginLeft: '5px'}}/>
                 </Button>
             </Box>
+            {user.role === 'user' ?
             <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
@@ -56,16 +57,23 @@ const UserMenu = ({user}) => {
                     'aria-labelledby': 'basic-button',
                 }}
             >
-                {user.role === 'user' ?
-                    <>
-                        <MenuItem onClick={handleClose} component={Link} to="/artists/new" color="inherit">Add Artist</MenuItem>
-                        <MenuItem onClick={handleClose} component={Link} to="/albums/new" color="inherit">Add Album</MenuItem>
-                        <MenuItem onClick={handleClose} component={Link} to="/tracks/new" color="inherit">Add Track</MenuItem>
-                        <MenuItem onClick={() => dispatch(logoutUser())}>Logout</MenuItem>
-                    </> :
-                    <MenuItem onClick={() => dispatch(logoutUser())}>Logout</MenuItem>}
-            </Menu>
-        </Box>
+                <MenuItem onClick={handleClose} component={Link} to="/artists/new" color="inherit">Add Artist</MenuItem>
+                <MenuItem onClick={handleClose} component={Link} to="/albums/new" color="inherit">Add Album</MenuItem>
+                <MenuItem onClick={handleClose} component={Link} to="/tracks/new" color="inherit">Add Track</MenuItem>
+                <MenuItem onClick={() => dispatch(logoutUser())}>Logout</MenuItem>
+            </Menu> :
+            <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                }}
+            >
+                <MenuItem onClick={() => dispatch(logoutUser())}>Logout</MenuItem>
+            </Menu> }
+            </Box>
     );
 };
 

@@ -79,6 +79,23 @@ router.post('/', upload.single('image'), async (req, res) => {
     }
 });
 
+router.post('/:id/publish', auth, permit('admin'), async (req, res) => {
+    console.log(req.params.id);
+
+    try{
+        const album = await Album.findById(req.params.id);
+        if (!album) {
+            res.status(404).send({message: 'Album is not found!'});
+        }
+
+        const publishedAlbum = {...album._doc, publish: true};
+        const updateAlbum = await Album.findByIdAndUpdate(req.params.id, publishedAlbum);
+        res.send(updateAlbum);
+    } catch (e) {
+        res.sendStatus(500);
+    }
+});
+
 router.delete('/:id', auth, permit('admin'), async (req, res) => {
     try{
         await Album.findByIdAndDelete(req.params.id);

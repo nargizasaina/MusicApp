@@ -52,6 +52,23 @@ router.post('/', upload.single('image'), async (req, res) => {
     }
 });
 
+router.post('/:id/publish', auth, permit('admin'), async (req, res) => {
+    console.log(req.params.id);
+
+    try{
+        const artist = await Artist.findById(req.params.id);
+        if (!artist) {
+            res.status(404).send({message: 'Artist is not found!'});
+        }
+
+        const publishedArtist = {...artist._doc, publish: true};
+        const updateArtist = await Artist.findByIdAndUpdate(req.params.id, publishedArtist);
+        res.send(updateArtist);
+    } catch (e) {
+        res.sendStatus(500);
+    }
+});
+
 router.delete('/:id', auth, permit('admin'), async (req, res) => {
     try{
         await Artist.findByIdAndDelete(req.params.id);

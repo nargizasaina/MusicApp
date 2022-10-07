@@ -23,7 +23,7 @@ const run = async () => {
     }, {
         title: 'Frank Sinatra',
         image: 'fixtures/frank.jpeg',
-        description: 'Francis Albert Sinatra (/sɪˈnɑːtrə/; December 12, 1915 – May 14, 1998) was an American singer and actor. Nicknamed the "Chairman of the Board" and later called Ole \'Blue Eyes, Sinatra was one of the most popular entertainers of the 1940s, 1950s and 1960s.',
+        description: 'Francis Albert Sinatra (December 12, 1915 – May 14, 1998) was an American singer and actor. Sinatra was one of the most popular entertainers of the 1940s, 1950s and 1960s.',
         publish: true
     }, {
         title: 'Dua Lipa',

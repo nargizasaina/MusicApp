@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {deleteArtist, fetchArtists} from "../../store/actions/artistsActions";
-import {deleteAlbum, fetchAllAlbums} from "../../store/actions/albumsActions";
-import {deleteTrack, fetchAllTracks} from "../../store/actions/tracksActions";
+import {deleteArtist, fetchArtists, publishArtist} from "../../store/actions/artistsActions";
+import {deleteAlbum, fetchAllAlbums, publishAlbum} from "../../store/actions/albumsActions";
+import {deleteTrack, fetchAllTracks, publishTrack} from "../../store/actions/tracksActions";
 import AdminPageArtists from "../../components/AdminPageArtists/AdminPageArtists";
 import {Typography} from "@mui/material";
 import AdminPageTracks from "../../components/AdminPageTracks/AdminPageTracks";
@@ -22,8 +22,20 @@ const AdminPage = () => {
         dispatch(fetchAllTracks());
     }, [dispatch]);
 
-    const onArtistPublish = id => {
+    const onArtistPublish = async id => {
+        await dispatch(publishArtist(id));
+        dispatch(fetchArtists());
+    };
 
+    const onAlbumPublish = async id => {
+        await dispatch(publishAlbum(id));
+        dispatch(fetchAllAlbums());
+    };
+
+    const onTrackPublish = async id => {
+        console.log(id);
+        await dispatch(publishTrack(id));
+        dispatch(fetchAllTracks());
     };
 
     const onArtistDelete = async (id) => {
@@ -71,7 +83,7 @@ const AdminPage = () => {
                         artist={album.artist?.title}
                         year={album.year}
                         publish={album.publish}
-                        onPublish={onArtistPublish}
+                        onPublish={onAlbumPublish}
                         onDelete={onAlbumDelete}
                     />
                 ))}
@@ -87,7 +99,7 @@ const AdminPage = () => {
                         length={track.length}
                         number={track.number}
                         publish={track.publish}
-                        onPublish={onArtistPublish}
+                        onPublish={onTrackPublish}
                         onDelete={onTrackDelete}
                     />
                 ))}

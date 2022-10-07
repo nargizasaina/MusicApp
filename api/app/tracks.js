@@ -63,8 +63,20 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/:id/publish', auth, permit('admin'), async (req, res) => {
-    const track = await Track.findById(req.params.id);
-    console.log(track);
+    console.log(req.params.id);
+
+    try{
+        const track = await Track.findById(req.params.id);
+        if (!track) {
+            res.status(404).send({message: 'Track is not found!'});
+        }
+
+        const publishedTrack = {...track._doc, publish: true};
+        const updateTrack = await Track.findByIdAndUpdate(req.params.id, publishedTrack);
+        res.send(updateTrack);
+    } catch (e) {
+        res.sendStatus(500);
+    }
 });
 
 router.delete('/:id', auth, permit('admin'), async (req, res) => {
