@@ -13,8 +13,10 @@ const Registration = () => {
     const error = useSelector(state => state.users.registerError);
 
     const [user, setUser] = useState({
-        username: '',
+        displayName: '',
         password: '',
+        email: '',
+        avatarImage: ''
     });
 
     useEffect(() => {
@@ -52,12 +54,21 @@ const Registration = () => {
                 </Typography>
                 <Box component="form" onSubmit={onSubmit}>
                     <InputField
-                        name="username"
-                        value={user.username}
+                        name="email"
+                        value={user.email}
                         onChange={onChange}
-                        label="Username"
+                        label="Email"
                         required={true}
-                        error={getFieldError('username')}
+                        error={getFieldError('email')}
+                        margin="normal"
+                    />
+                    <InputField
+                        name="displayName"
+                        value={user.displayName}
+                        onChange={onChange}
+                        label="Display Name"
+                        required={true}
+                        error={getFieldError('displayName')}
                         margin="normal"
                     />
                     <InputField

@@ -3,13 +3,19 @@ const User = require('../models/User');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-    const {username, password} = req.body;
+    const {email, password, displayName} = req.body;
 
-    if (!username || !password) {
-        return res.status(400).send({error: 'Data not valid'});
+    const userData = {
+        email,
+        password,
+        displayName,
+        avatarImage: null
+    };
+
+    console.log(req.file);
+    if (req.file) {
+        userData.avatarImage = 'uploads/' + req.file.filename;
     }
-
-    const userData = {username, password};
 
     try{
         const user = new User(userData);
@@ -23,7 +29,7 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/sessions', async (req, res) => {
-    const user = await User.findOne({username: req.body.username});
+    const user = await User.findOne({email: req.body.email});
 
     if (!user) {
         return res.status(401).send({message: 'Credentials are wrong'});
@@ -39,6 +45,10 @@ router.post('/sessions', async (req, res) => {
     await user.save({validateBeforeSave: false});
 
     res.send(user);
+});
+
+router.post('/facebookLogin', async (req, res) => {
+
 });
 
 router.delete('/sessions', async (req, res) => {

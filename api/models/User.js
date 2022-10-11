@@ -5,22 +5,30 @@ const Schema = mongoose.Schema;
 const SALT_WORK_FACTOR = 10;
 
 const UserSchema = new Schema({
-    username: {
+    email: {
         type: String,
-        required: true,
+        required: this.facebookId === null,
         unique: true,
         validate: {
             validator: async value => {
-                const user = await User.findOne({username: value});
+                const user = await User.findOne({email: value});
 
                 if (user) return false;
             },
             message: 'This user is already registered!',
         }
     },
+    facebookId: {
+        type: String,
+        required: this.email === null,
+    },
     password: {
         type: String,
         required: true,
+    },
+    displayName: {
+        type: String,
+        required: true
     },
     token: {
         type: String,
@@ -31,7 +39,8 @@ const UserSchema = new Schema({
         type: String,
         default: 'user',
         enum: ['admin', 'user']
-    }
+    },
+    avatarImage: String
 });
 
 UserSchema.pre('save', async function (next){
