@@ -6,6 +6,7 @@ import InputField from "../../components/UI/Form/InputField/InputField";
 import LoadingButton from "@mui/lab/LoadingButton";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {Link} from "react-router-dom";
+import FacebookLogin from "../../components/FacebookLogin/FacebookLogin";
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const Login = () => {
     const error = useSelector(state => state.users.loginError);
 
     const [user, setUser] = useState({
-        username: '',
+        email: '',
         password: ''
     });
 
@@ -49,10 +50,10 @@ const Login = () => {
 
                 <Box component="form" onSubmit={onSubmit}>
                     <InputField
-                        name="username"
-                        value={user.username}
+                        name="email"
+                        value={user.email}
                         onChange={onChange}
-                        label="Username"
+                        label="Email"
                         required={true}
                         margin="normal"
                     />
@@ -77,6 +78,7 @@ const Login = () => {
                     >
                         Sign In
                     </LoadingButton>
+                    <FacebookLogin/>
                     <Grid container justifyContent={"flex-end"}>
                         <Grid item>
                             <Link to="/registration">

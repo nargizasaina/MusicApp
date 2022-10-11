@@ -43,7 +43,7 @@ const UserMenu = ({user}) => {
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick}
                 >
-                    Hello, {user.username}!
+                    Hello, {user.displayName}!
                     <VerifiedUserIcon sx={{marginLeft: '5px'}}/>
                 </Button>
             </Box>

@@ -62,6 +62,20 @@ export const loginUser = userData => {
     };
 };
 
+export const facebookLogin = data => {
+    return async dispatch => {
+        try {
+            dispatch(loginUserRequest());
+            const response = await axiosApi.post('/users/facebookLogin', data);
+            dispatch(loginUserSuccess(response.data.user));
+            console.log(response.data);
+            dispatch(historyPush('/'));
+        } catch (e) {
+            dispatch(loginUserFailure(e.response.data));
+        }
+    };
+};
+
 export const logoutUser = () => {
     return async (dispatch, getState) => {
         try{
