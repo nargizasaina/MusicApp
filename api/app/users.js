@@ -20,7 +20,6 @@ const upload = multer({storage});
 
 router.post('/', upload.single('avatarImage'), async (req, res) => {
     const {email, password, displayName} = req.body;
-    console.log(req.body);
 
     const userData = {
         email,
@@ -29,7 +28,6 @@ router.post('/', upload.single('avatarImage'), async (req, res) => {
         avatarImage: null
     };
 
-    console.log(req.file);
     if (req.file) {
         userData.avatarImage = 'uploads/' + req.file.filename;
     }

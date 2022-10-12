@@ -10,8 +10,10 @@ import {apiUrl} from "../../../../config";
 const UserMenu = ({user}) => {
     const dispatch = useDispatch();
 
-    let avatar = null;
-    if (user.avatarImage) {
+    let avatar;
+    if (user.avatarImage && user.facebookId) {
+        avatar = user.avatarImage;
+    } else {
         avatar = apiUrl + '/' + user.avatarImage;
     }
 

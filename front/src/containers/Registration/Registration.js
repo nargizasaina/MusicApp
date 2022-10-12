@@ -99,7 +99,7 @@ const Registration = () => {
                         <FileInput
                             name="avatarImage"
                             onChange={onFileChange}
-                            label="Avatar Image"
+                            label="Avatar"
                             error={getFieldError('avatarImage')}
                         />
                     </Box>

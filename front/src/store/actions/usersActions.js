@@ -65,10 +65,8 @@ export const facebookLogin = data => {
     return async dispatch => {
         try {
             dispatch(loginUserRequest());
-            console.log(data);
             const response = await axiosApi.post('/users/facebookLogin', data);
-            dispatch(loginUserSuccess(response.data.user));
-            console.log(data);
+            dispatch(loginUserSuccess(response.data));
             dispatch(historyPush('/'));
         } catch (e) {
             dispatch(loginUserFailure(e.response.data));
