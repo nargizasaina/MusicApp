@@ -3,9 +3,10 @@ import {Box, Container, Grid, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 import LoadingButton from '@mui/lab/LoadingButton';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import InputField from "../../components/UI/Form/InputField/InputField";
 import {useDispatch, useSelector} from "react-redux";
 import {clearRegisterErrors, registerUser} from "../../store/actions/usersActions";
+import InputField from "../../components/UI/Form/InputField/InputField";
+import FileInput from "../../components/UI/Form/FileInput/FileInput";
 
 const Registration = () => {
     const dispatch = useDispatch();
@@ -33,9 +34,21 @@ const Registration = () => {
         }));
     };
 
+    const onFileChange = e => {
+        const name = e.target.name;
+        const file = e.target.files[0];
+
+        setUser(prev => ({...prev, [name]: file}));
+    };
+
     const onSubmit = e => {
         e.preventDefault();
-        dispatch(registerUser({...user}));
+
+        const formData = new FormData();
+        Object.keys(user).forEach(key => {
+            formData.append(key, user[key]);
+        });
+        dispatch(registerUser(formData));
     };
 
     const getFieldError = fieldName => {
@@ -60,7 +73,8 @@ const Registration = () => {
                         label="Email"
                         required={true}
                         error={getFieldError('email')}
-                        margin="normal"
+                        margin="dense"
+                        type="email"
                     />
                     <InputField
                         name="displayName"
@@ -69,7 +83,7 @@ const Registration = () => {
                         label="Display Name"
                         required={true}
                         error={getFieldError('displayName')}
-                        margin="normal"
+                        margin="dense"
                     />
                     <InputField
                         name="password"
@@ -79,8 +93,16 @@ const Registration = () => {
                         type="password"
                         required={true}
                         error={getFieldError('password')}
-                        margin="normal"
+                        margin="dense"
                     />
+                    <Box marginTop={1}>
+                        <FileInput
+                            name="avatarImage"
+                            onChange={onFileChange}
+                            label="Avatar Image"
+                            error={getFieldError('avatarImage')}
+                        />
+                    </Box>
                     <LoadingButton
                         type="submit"
                         fullWidth
@@ -89,7 +111,7 @@ const Registration = () => {
                         loadingPosition="start"
                         startIcon={<AccountCircleIcon />}
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ mt: 2, mb: 2 }}
                     >
                         Sign Up
                     </LoadingButton>

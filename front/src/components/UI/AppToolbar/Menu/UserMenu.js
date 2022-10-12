@@ -3,11 +3,17 @@ import {Box, Button, Menu} from "@mui/material";
 import {Link} from "react-router-dom";
 import MenuItem from '@mui/material/MenuItem';
 import {useDispatch} from "react-redux";
-import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import Avatar from '@mui/material/Avatar';
 import {logoutUser} from "../../../../store/actions/usersActions";
+import {apiUrl} from "../../../../config";
 
 const UserMenu = ({user}) => {
     const dispatch = useDispatch();
+
+    let avatar = null;
+    if (user.avatarImage) {
+        avatar = apiUrl + '/' + user.avatarImage;
+    }
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -44,8 +50,8 @@ const UserMenu = ({user}) => {
                     onClick={handleClick}
                 >
                     Hello, {user.displayName}!
-                    <VerifiedUserIcon sx={{marginLeft: '5px'}}/>
                 </Button>
+                <Avatar alt="user" src={avatar} sx={{marginLeft: '5px'}}/>
             </Box>
             {user.role === 'user' ?
             <Menu

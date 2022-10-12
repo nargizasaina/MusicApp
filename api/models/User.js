@@ -7,7 +7,7 @@ const SALT_WORK_FACTOR = 10;
 const UserSchema = new Schema({
     email: {
         type: String,
-        required: this.facebookId === null,
+        required: true,
         unique: true,
         validate: {
             validator: async value => {
@@ -20,7 +20,6 @@ const UserSchema = new Schema({
     },
     facebookId: {
         type: String,
-        required: this.email === null,
     },
     password: {
         type: String,
