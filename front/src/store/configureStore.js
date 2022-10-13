@@ -2,7 +2,7 @@ import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import artistsReducer from "./reducers/artistsReducer";
 import albumsReducer from "./reducers/albumsReducer";
 import tracksReducer from "./reducers/tracksReducer";
-import usersReducer from "./reducers/usersReducer";
+import usersReducer, {initialState} from "./reducers/usersReducer";
 import trackHistoryReducer from "./reducers/trackHistoryReducer";
 import thunk from "redux-thunk";
 import {loadFromLocalStorage, saveToLocalStorage} from "./localStorage";
@@ -28,7 +28,10 @@ const store = createStore(
 
 store.subscribe(() => {
     saveToLocalStorage({
-        users: store.getState().users,
+        users: {
+            ...initialState,
+            user: store.getState().users.user
+        },
     })
 });
 

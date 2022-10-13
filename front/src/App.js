@@ -37,28 +37,23 @@ const App = () => {
                     component={TrackHistory}
                 />
                 <ProtectedRoute
-                    isAllowed={user?.role === 'user'}
+                    isAllowed={user}
                     redirectTo="/"
                     path="/artists/new"
                     component={AddArtist}
                 />
                 <ProtectedRoute
-                    isAllowed={user?.role === 'user'}
+                    isAllowed={user}
                     redirectTo="/"
                     path="/albums/new"
                     component={AddAlbum}
                 />
                 <ProtectedRoute
-                    isAllowed={user?.role === 'user'}
+                    isAllowed={user}
                     redirectTo="/"
                     path="/tracks/new"
                     component={AddTrack}
                 />
-
-                {/*<Route path="/artists/new" component={AddArtist}/>*/}
-                {/*<Route path="/albums/new" component={AddAlbum}/>*/}
-                {/*<Route path="/tracks/new" component={AddTrack}/>*/}
-
                 <Route render={() => <h1>Not Found</h1>} />
             </Switch>
         </Layout>

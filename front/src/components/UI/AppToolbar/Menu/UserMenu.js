@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import MenuItem from '@mui/material/MenuItem';
 import {useDispatch} from "react-redux";
 import Avatar from '@mui/material/Avatar';
+import { deepPurple } from '@mui/material/colors';
 import {logoutUser} from "../../../../store/actions/usersActions";
 import {apiUrl} from "../../../../config";
 
@@ -53,9 +54,12 @@ const UserMenu = ({user}) => {
                 >
                     Hello, {user.displayName}!
                 </Button>
-                <Avatar alt="user" src={avatar} sx={{marginLeft: '5px'}}/>
+                <Avatar
+                    alt={user.displayName.toUpperCase()}
+                    src={avatar}
+                    sx={{marginLeft: '5px', marginBottom: '5px', bgcolor: deepPurple[500]}}/>
             </Box>
-            {user.role === 'user' ?
+
             <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
@@ -69,19 +73,8 @@ const UserMenu = ({user}) => {
                 <MenuItem onClick={handleClose} component={Link} to="/albums/new" color="inherit">Add Album</MenuItem>
                 <MenuItem onClick={handleClose} component={Link} to="/tracks/new" color="inherit">Add Track</MenuItem>
                 <MenuItem onClick={() => dispatch(logoutUser())}>Logout</MenuItem>
-            </Menu> :
-            <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                    'aria-labelledby': 'basic-button',
-                }}
-            >
-                <MenuItem onClick={() => dispatch(logoutUser())}>Logout</MenuItem>
-            </Menu> }
-            </Box>
+            </Menu>
+        </Box>
     );
 };
 

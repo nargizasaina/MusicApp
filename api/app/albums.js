@@ -23,6 +23,7 @@ const upload = multer({storage});
 
 router.get('/', async (req, res) => {
     const sort = {year: 1};
+
     try{
         if (req.query.artist) {
             const albumsById = await Album
@@ -39,7 +40,6 @@ router.get('/', async (req, res) => {
 
             res.send(albums);
         }
-
     } catch {
         res.sendStatus(500);
     }
@@ -81,8 +81,6 @@ router.post('/', auth, upload.single('image'), async (req, res) => {
 });
 
 router.post('/:id/publish', auth, permit('admin'), async (req, res) => {
-    console.log(req.params.id);
-
     try{
         const album = await Album.findById(req.params.id);
         if (!album) {

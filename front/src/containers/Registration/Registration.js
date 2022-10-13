@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {clearRegisterErrors, registerUser} from "../../store/actions/usersActions";
 import InputField from "../../components/UI/Form/InputField/InputField";
 import FileInput from "../../components/UI/Form/FileInput/FileInput";
+import FacebookLogin from "../../components/FacebookLogin/FacebookLogin";
 
 const Registration = () => {
     const dispatch = useDispatch();
@@ -115,6 +116,7 @@ const Registration = () => {
                     >
                         Sign Up
                     </LoadingButton>
+                    <FacebookLogin/>
                     <Grid container justifyContent={"flex-end"}>
                         <Grid item>
                             <Link to="/login">
